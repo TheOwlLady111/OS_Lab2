@@ -40,40 +40,49 @@
             // 
             // label1
             // 
-            this.label1.Location = new System.Drawing.Point(22, 25);
+            this.label1.Font = new System.Drawing.Font("Verdana", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label1.Location = new System.Drawing.Point(129, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(278, 30);
+            this.label1.Size = new System.Drawing.Size(538, 47);
             this.label1.TabIndex = 0;
-            this.label1.Text = "label1";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(3, 103);
+            this.textBox1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox1.Location = new System.Drawing.Point(59, 94);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(248, 100);
             this.textBox1.TabIndex = 1;
+            this.textBox1.Text = "Enter first value";
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.textBox1.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.textBox1_KeyPress_1);
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(287, 103);
+            this.textBox2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox2.Location = new System.Drawing.Point(476, 94);
             this.textBox2.Multiline = true;
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(260, 100);
             this.textBox2.TabIndex = 2;
+            this.textBox2.Text = "result 1";
+            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(582, 103);
+            this.textBox3.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox3.Location = new System.Drawing.Point(59, 209);
             this.textBox3.Multiline = true;
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(218, 100);
+            this.textBox3.Size = new System.Drawing.Size(248, 100);
             this.textBox3.TabIndex = 3;
+            this.textBox3.Text = "Enter second value";
+            this.textBox3.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(59, 339);
+            this.button1.Location = new System.Drawing.Point(301, 331);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(192, 29);
             this.button1.TabIndex = 4;
@@ -83,19 +92,19 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(488, 339);
+            this.button2.Location = new System.Drawing.Point(694, 394);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(94, 29);
             this.button2.TabIndex = 5;
-            this.button2.Text = "close";
+            this.button2.Text = "stop";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click_1);
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(300, 339);
+            this.button3.Location = new System.Drawing.Point(301, 366);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(94, 29);
+            this.button3.Size = new System.Drawing.Size(192, 29);
             this.button3.TabIndex = 6;
             this.button3.Text = "Peterson";
             this.button3.UseVisualStyleBackColor = true;
@@ -103,11 +112,14 @@
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(287, 209);
+            this.textBox4.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.textBox4.Location = new System.Drawing.Point(476, 209);
             this.textBox4.Multiline = true;
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(260, 92);
+            this.textBox4.Size = new System.Drawing.Size(260, 100);
             this.textBox4.TabIndex = 7;
+            this.textBox4.Text = "result 2";
+            this.textBox4.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Form1
             // 

@@ -8,21 +8,29 @@ namespace OS_Lab2
             private string message = "";
             private int turn1;
             private bool[] interested = new bool[2] {false,false};
+            private bool key1;
+            private bool key2;
+            private bool key3;
+            private bool key4;
 
-        public Form1()
+
+
+             public Form1()
             {
                 InitializeComponent();
                
             }
             public void Stop()
             {
-               thread1.Abort();
-               thread2.Abort();
+               key1 = false;
+               key2 = false;
+               key3 = false;
+               key4 = false;
             }
             private void Task1()
             {
 
-            while (true)
+            while (key1)
             {
                 while (turn != 0)
                 {
@@ -31,7 +39,7 @@ namespace OS_Lab2
                 // critical region
                
                 Thread.Sleep(1000);
-                Action action = () => label1.Text = "Возведение в квадрат1";
+                Action action = () => label1.Text = "Squaring1 (strict alternation)";
                 Invoke(action);
                 action = () => textBox4.Text = string.Empty;
                 Invoke(action);
@@ -47,7 +55,7 @@ namespace OS_Lab2
         private void Task2()
         {
 
-            while (true)
+            while (key2)
             {
                 while (turn != 1)
                 {
@@ -57,12 +65,12 @@ namespace OS_Lab2
                 // critical region
                
                 Thread.Sleep(1000);
-                Action action = () => label1.Text = "Возведение в квадрат2 (strict alternation)";
+                Action action = () => label1.Text = "Squaring2 (strict alternation)";
                 Invoke(action);
                 action = () => textBox2.Text = string.Empty;
                 Invoke(action);
                 string str1 = textBox3.Text;
-                int symbol = Convert.ToInt32(str1);
+                double symbol = Convert.ToDouble(str1);
                 turn = 0;
 
                 // noncritical region                
@@ -74,13 +82,13 @@ namespace OS_Lab2
 
         private void Task3()
         {
-            while (true)
+            while (key3)
             {
                 enter_region(0);
                 
                
                 Thread.Sleep(1000);
-                Action action = () => label1.Text = "Возведение в квадрат1";
+                Action action = () => label1.Text = "Squaring1 (peterson)";
                 Invoke(action);
                 action = () => textBox4.Text = string.Empty;
                 Invoke(action);
@@ -97,18 +105,18 @@ namespace OS_Lab2
         }
         private void Task4()
         {
-            while (true)
+            while (key3)
             {
                 enter_region(1);
                 
                 
                 Thread.Sleep(1000);
-                Action action = () => label1.Text = "Возведение в квадрат2";
+                Action action = () => label1.Text = "Squaring2 (peterson)";
                 Invoke(action);
                 action = () => textBox2.Text = string.Empty;
                 Invoke(action);
                 string str1 = textBox3.Text;
-                int symbol = Convert.ToInt32(str1);
+                double symbol = Convert.ToDouble(str1);
                 
                 
                 leave_region(1);
@@ -128,6 +136,9 @@ namespace OS_Lab2
 
         private void button1_Click_1(Object sender, EventArgs e)
         {
+            Stop();
+            key1 = true;
+            key2 = true;
             thread1 = new Thread(Task1);
             thread2 = new Thread(Task2);
             thread1.Start();
@@ -139,6 +150,16 @@ namespace OS_Lab2
             Stop();
         }
 
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Stop();
+            key3 = true;
+            key4 = true;
+            thread1 = new Thread(Task3);
+            thread2 = new Thread(Task4);
+            thread1.Start();
+            thread2.Start();
+        }
         private void enter_region(int process)
         {
             int other;
@@ -153,12 +174,6 @@ namespace OS_Lab2
             interested[process] = false;
         }
 
-        private void button3_Click(object sender, EventArgs e)
-        {
-            thread1 = new Thread(Task3);
-            thread2 = new Thread(Task4);
-            thread1.Start();
-            thread2.Start();
-        }
+       
     }
 }
