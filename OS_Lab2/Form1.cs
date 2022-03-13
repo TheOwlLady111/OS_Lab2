@@ -21,54 +21,55 @@ namespace OS_Lab2
             }
             private void Task1()
             {
-                while (true)
-                {
-                    while (turn != 0)
-                    {
-                        ;
-                    }
-                    // critical region (квадрат числа)
-                    Action action = () => label1.Text = "Возведение в квадрат";
-                    Invoke(action);
-                    Thread.Sleep(1000);
-                    string str = textBox1.Text;
-                    int number = Convert.ToInt32(str);
-                    turn = 1;
-                    // noncritical region
-                    action = () => textBox2.Text = Math.Pow(number, 2).ToString();
-                    Invoke(action);
 
-                }
-            }
-            private void Task2()
+            while (true)
             {
-                while (true)
+                while (turn != 0)
                 {
-                    while (turn != 1)
-                    {
-                        ;
-                    }
-
-                    // critical region (звук)
-                    Action action = () => label1.Text = "Воспроизведение звука";
-                    Invoke(action);
-                    Thread.Sleep(1000);
-                    string str1 = textBox3.Text;
-                    int symbol = Convert.ToInt32(str1);
-
-                    action = () => Console.Beep(4000, 500);
-
-
-                    turn = 0;
-
-                    // noncritical region                
-                    for (int i = 1; i <= symbol; i++)
-                    {
-                        Invoke(action);
-                    }
-
+                    ;
                 }
+                // critical region
+               
+                Thread.Sleep(1000);
+                Action action = () => label1.Text = "Возведение в квадрат1";
+                Invoke(action);
+                action = () => textBox4.Text = string.Empty;
+                Invoke(action);
+                string str = textBox1.Text;
+                int number = Convert.ToInt32(str);
+                turn = 1;
+
+                // noncritical region
+                action = () => textBox2.Text = Math.Pow(number, 2).ToString();
+                Invoke(action);
             }
+            }
+        private void Task2()
+        {
+
+            while (true)
+            {
+                while (turn != 1)
+                {
+                    ;
+                }
+
+                // critical region
+               
+                Thread.Sleep(1000);
+                Action action = () => label1.Text = "Возведение в квадрат2 (strict alternation)";
+                Invoke(action);
+                action = () => textBox2.Text = string.Empty;
+                Invoke(action);
+                string str1 = textBox3.Text;
+                int symbol = Convert.ToInt32(str1);
+                turn = 0;
+
+                // noncritical region                
+                action = () => textBox4.Text = Math.Pow(symbol, 2).ToString();
+                Invoke(action);
+            }
+        }
 
 
         private void Task3()
@@ -76,11 +77,16 @@ namespace OS_Lab2
             while (true)
             {
                 enter_region(0);
+                
+               
+                Thread.Sleep(1000);
                 Action action = () => label1.Text = "Возведение в квадрат1";
                 Invoke(action);
-                Thread.Sleep(1000);
+                action = () => textBox4.Text = string.Empty;
+                Invoke(action);
                 string str = textBox1.Text;
                 double number = Convert.ToDouble(str);
+               
                 leave_region(0);
                 // noncritical region
                 action = () => textBox2.Text = Math.Pow(number, 2).ToString();
@@ -94,20 +100,21 @@ namespace OS_Lab2
             while (true)
             {
                 enter_region(1);
-                Action action = () => label1.Text = "Воспроизведение звука1";
-                Invoke(action);
+                
+                
                 Thread.Sleep(1000);
+                Action action = () => label1.Text = "Возведение в квадрат2";
+                Invoke(action);
+                action = () => textBox2.Text = string.Empty;
+                Invoke(action);
                 string str1 = textBox3.Text;
                 int symbol = Convert.ToInt32(str1);
-
-                action = () => Console.Beep(4000, 500);
+                
+                
                 leave_region(1);
 
-                // noncritical region                
-                for (int i = 1; i <= symbol; i++)
-                {
-                    Invoke(action);
-                }
+                action = () => textBox4.Text = Math.Pow(symbol, 2).ToString();
+                Invoke(action);
 
             }
         }
