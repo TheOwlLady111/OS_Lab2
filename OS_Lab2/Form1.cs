@@ -7,12 +7,12 @@ namespace OS_Lab2
             private int turn = 0;
             private string message = "";
             private int turn1;
-            private bool[] interested = new bool[2] {false,false};
+            private int[] interested = new int[2] {0,0};
             private bool key1;
             private bool key2;
             private bool key3;
             private bool key4;
-
+            
 
 
              public Form1()
@@ -20,6 +20,8 @@ namespace OS_Lab2
                 InitializeComponent();
                
             }
+
+       
             public void Stop()
             {
                key1 = false;
@@ -31,25 +33,22 @@ namespace OS_Lab2
             {
 
             while (key1)
-            {
+            {   string str = textBox1.Text;
+                int number = Convert.ToInt32(str);
                 while (turn != 0)
                 {
-                    ;
+                    
                 }
-                // critical region
-               
                 Thread.Sleep(1000);
+
                 Action action = () => label1.Text = "Squaring1 (strict alternation)";
                 Invoke(action);
                 action = () => textBox4.Text = string.Empty;
                 Invoke(action);
-                string str = textBox1.Text;
-                int number = Convert.ToInt32(str);
-                turn = 1;
-
-                // noncritical region
+               
                 action = () => textBox2.Text = Math.Pow(number, 2).ToString();
                 Invoke(action);
+                turn = 1;
             }
             }
         private void Task2()
@@ -57,48 +56,44 @@ namespace OS_Lab2
 
             while (key2)
             {
+                string str1 = textBox3.Text;
+                double symbol = Convert.ToDouble(str1);
                 while (turn != 1)
                 {
-                    ;
+                    
                 }
-
-                // critical region
-               
                 Thread.Sleep(1000);
                 Action action = () => label1.Text = "Squaring2 (strict alternation)";
                 Invoke(action);
                 action = () => textBox2.Text = string.Empty;
                 Invoke(action);
-                string str1 = textBox3.Text;
-                double symbol = Convert.ToDouble(str1);
-                turn = 0;
-
-                // noncritical region                
+               
+                             
                 action = () => textBox4.Text = Math.Pow(symbol, 2).ToString();
                 Invoke(action);
+                turn = 0;
             }
         }
 
 
         private void Task3()
         {
+           
             while (key3)
-            {
+            { 
+                string str = textBox1.Text;
+                double number = Convert.ToDouble(str);
                 enter_region(0);
-                
-               
                 Thread.Sleep(1000);
                 Action action = () => label1.Text = "Squaring1 (peterson)";
                 Invoke(action);
-                action = () => textBox4.Text = string.Empty;
+                //Thread.Sleep(1000);
+                //action = () => textBox4.Text = string.Empty;
                 Invoke(action);
-                string str = textBox1.Text;
-                double number = Convert.ToDouble(str);
-               
+
+               action = () => textBox4.Text = Math.Pow(number, 2).ToString();
+                Invoke(action);
                 leave_region(0);
-                // noncritical region
-                action = () => textBox2.Text = Math.Pow(number, 2).ToString();
-                Invoke(action);
             }
 
             
@@ -106,24 +101,20 @@ namespace OS_Lab2
         private void Task4()
         {
             while (key3)
-            {
-                enter_region(1);
-                
-                
-                Thread.Sleep(1000);
-                Action action = () => label1.Text = "Squaring2 (peterson)";
-                Invoke(action);
-                action = () => textBox2.Text = string.Empty;
-                Invoke(action);
+            {   
                 string str1 = textBox3.Text;
                 double symbol = Convert.ToDouble(str1);
+                enter_region(1);
+                Thread.Sleep(1000);
+                Action action = () => label1.Text = "Squaring2 (peterson)";
                 
+                Invoke(action);
                 
-                leave_region(1);
-
+                //action = () => textBox2.Text = string.Empty;
+                Invoke(action);
                 action = () => textBox4.Text = Math.Pow(symbol, 2).ToString();
                 Invoke(action);
-
+                leave_region(1);
             }
         }
         private void textBox1_KeyPress_1(object sender, KeyPressEventArgs e)
@@ -162,16 +153,15 @@ namespace OS_Lab2
         }
         private void enter_region(int process)
         {
-            int other;
-            other = 1 - process;
-            interested[process] = true;
-            turn1 = process;
-            while (turn1 == process && interested[other] == true) { };
+           
+            interested[process] = 1;
+            turn1 = 1 - process;
+            while (turn1 == process && interested[turn1] == 1) { };
         }
 
         void leave_region(int process)
         {
-            interested[process] = false;
+            interested[process] = 0;
         }
 
        
